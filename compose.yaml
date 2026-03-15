@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+    
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.python
+    container_name: web
+    restart: on-failure
+    networks:
+      backend: 
+        ipv4_address: 172.20.0.5
+    ports:
+      - 5000:5000   
+    env_file:
+      - web.env
+   
+        
+  db:
+    image: mysql:8
+    container_name: db_mysql
+    restart: on-failure
+    networks:
+      backend: 
+        ipv4_address: 172.20.0.10
+    ports:
+      - 3306:3306
+    env_file:
+      - .env
+    
+     
+include:
+   - path: 
+      - ./proxy.yaml
+      
+

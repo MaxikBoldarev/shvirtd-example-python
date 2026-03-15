@@ -178,6 +178,10 @@ def get_requests():
                 "records": result
             }
 
+@app.get("/health")
+async def health():
+    return {"status": "ok"}
+
 
 # --- 7. Запуск приложения ---
 # Для запуска этого файла используется ASGI-сервер, например, uvicorn.
